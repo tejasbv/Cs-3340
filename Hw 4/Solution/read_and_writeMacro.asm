@@ -1,13 +1,12 @@
 .data
 
-read:		.word		
 
 .text
 start:
-	.macro open_read(%x)
+	.macro open_read(%x, %Y)
 	#open the file
 	li 	$v0, 13
-	la	$a0, filename
+	la	$a0, %x
 	li	$a0, 0
 	li	$a2, 0
 	syscall
@@ -16,8 +15,8 @@ start:
 	
 	#read from file
 	li	$v0, 14
-	la	$a0, $s0
-	la	$a1, read
+	move	$a0,$s0
+	la	$a1, %y
 	li	$a2, 80
 	syscall
 #################################################

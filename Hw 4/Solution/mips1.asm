@@ -68,7 +68,9 @@ exit:
 		syscall
 		
 		#read to buffer
-readtxt:	move	$s0,	$a1 
+	#	la	$a0,	filename
+	#	la	$a1,	read
+readtxt:		move	$s0,	$a1 
 		li	$v0,	13 
 		li	$a1,	0
 		li	$a2,	0

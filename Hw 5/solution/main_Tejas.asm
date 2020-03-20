@@ -101,6 +101,7 @@ main:
 	print_int()
 	print_str("\n")
 	
+	reset()
 	j	main
 exit:	li 	$v0, 10
 	syscall

@@ -144,3 +144,13 @@ loopsize:	lb	$t2, ($t1)
 		j	loopsize
 returnsize:	#ends progrm
 .end_macro
+
+.macro	reset()
+.text
+	li	$t1,0
+	move	$t2, $s2
+loop:	sb	$0,uncompressed($t1)
+	addi	$t1,$t1,1
+	bne	$t1,$t2,loop
+
+.end_macro

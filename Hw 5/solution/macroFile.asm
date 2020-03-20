@@ -39,7 +39,7 @@
 .macro	open_file()
 
 .data
-	
+
 
 .text
 		li	$v0,	13 
@@ -113,13 +113,6 @@ remove:
    		sb $0, filename($s0)    # Add the terminating character in its place
 .end_macro
 
-
-.macro	RLE_compression()
-
-
-
-
-.end_macro
 
 .macro	getsize()
 

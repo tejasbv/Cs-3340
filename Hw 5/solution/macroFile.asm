@@ -12,12 +12,12 @@
 
 #################################################
 #macro instruction to print a char
-.macro print_char(%x)
+.macro print_char()
 .data
-	char:	.byte	%x
+	#set $a0 to the integer to print
 .text
-	li	$v0, 4
-	lw	$a0, char
+	li	$v0, 11
+	
 	syscall
 .end_macro
 
@@ -30,6 +30,19 @@
 .text
 	li	$v0, 4
 	la	$a0, str
+	syscall
+.end_macro
+
+#################################################
+
+#macro instruction to print a string
+.macro print_str_reg()
+.data
+#	str:	.asciiz	%x
+#set $a0 to contents to print
+.text
+	li	$v0, 4
+#	la	$a0, str
 	syscall
 .end_macro
 
@@ -58,13 +71,17 @@
 .macro	read_file()
 
 .data
-
+end:	.asciiz	"\0"
 .text
+#		la	$t0,end
+		lbu	$t1,end
 		li	$v0,	14
 		move	$a0,	$s1
 		la	$a1,	read
 		li	$a2,	1024
 		syscall
+		sb	$t1,read($v0)
+			
 .end_macro
 
 #################################################
@@ -105,6 +122,7 @@
 	
 .text	
 		 li $s0,0        # Set index to 0
+		
 remove:
     		lb $a3,filename($s0)    # Load character at index
    		addi $s0,$s0,1      # Increment index
